@@ -15,14 +15,15 @@ def main():
     serversocket.settimeout(300)
     cert_path = path.join(path.abspath(path.dirname(__file__)), "certs")
     host_address = ("212.201.8.88", 6657)
+    serversocket.bind(host_address)
 
     # Create a server side DTLS socket
     dtls_sock = wrap_server(serversocket,
                             keyfile=path.join(cert_path, "keycert.pem"),
                             certfile=path.join(cert_path, "keycert.pem"),
-                            ca_certs=path.join(cert_path, "ca-cert.pem"), )
-    dtls_sock.bind(host_address)
-    dtls_sock.listen(1)
+                            ca_certs=path.join(cert_path, "ca-cert.pem"),
+                            do_handshake_on_connect=True)
+
     print ("Waiting for CoAP Client to Connect ..")
 
     # Connect the Listening DTLS socket to CoAP
