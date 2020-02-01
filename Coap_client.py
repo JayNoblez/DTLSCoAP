@@ -100,6 +100,11 @@ def main():
         usage()
         sys.exit(2)
 
+   #if proxy_uri and not proxy_uri.startswith("http://") and not proxy_uri.startswith("https://"):
+    #    print("Proxy-Uri header must be conform to http[s]://host[:port]/path")
+     #   usage()
+      #  sys.exit(2)
+
     host, port, payload_path = parse_uri(payload_path)
     try:
         tmp = socket.gethostbyname(host)
